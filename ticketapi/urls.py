@@ -19,7 +19,7 @@ from django.contrib.auth.models import User
 from tickets.models import Ticket, Category, Chat
 from rest_framework import routers
 from rest_framework_simplejwt import views as jwt_views
-from tickets.views import UserViewSet, TicketViewSet, CategoryViewSet, ChatViewSet
+from tickets.views import UserViewSet, TicketViewSet, CategoryViewSet, ChatViewSet, GenreViewSet, ArtistViewSet, SongViewSet, AlbumViewSet
 
 
 # Routers provide an easy way of automatically determining the URL conf.
@@ -32,15 +32,23 @@ router.register(r'api/category', CategoryViewSet)
 
 router.register(r'api/chat',ChatViewSet)
 
+router.register(r'api/genre',GenreViewSet)
+
+router.register(r'api/artist',ArtistViewSet)
+
+router.register(r'api/song',SongViewSet)
+
+router.register(r'api/album',AlbumViewSet)
+
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     path('admin/', admin.site.urls),    
     path(r'', include(router.urls)),
-    path(r'api/', include('rest_framework.urls', namespace='rest_framework')),
-    path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh')
+    path(r'api/', include('rest_framework.urls', namespace='rest_framework'))
+    # path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    # path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh')
     
 
 ]
